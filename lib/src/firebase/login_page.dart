@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'auth_service.dart';
+import 'local_storage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,6 +13,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
+  LocalStorage localStorage = LocalStorage();
+  
   final formKey = GlobalKey<FormState>();
   final email = TextEditingController();
   final senha = TextEditingController();
@@ -26,6 +29,9 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    localStorage.getDadosLogin().then((value) {
+      if(value != null);
+    });
     setFormAction(true);
   }
 
@@ -156,6 +162,27 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: ElevatedButton(
+                    onPressed: (){
+                      context.read<AuthService>().loginGoogle();
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.login),
+                        Padding(
+                          padding: EdgeInsets.all(16),
+                          child: Text(
+                            "Entrar com Google",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                      ]
                     ),
                   ),
                 ),

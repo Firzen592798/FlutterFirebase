@@ -43,3 +43,8 @@ flutterfire configure
 Caso não dê certo, dar um firebase logout
 
 Instalar as dependências do firebase: firebase_core é obrigatória
+
+# Keystore certificado
+
+Usar o comando abaixo para ver o fingerprint e add no 
+keytool -list -v -keystore C:\Users\USER\.android\debug.keystore -alias androiddebugkey

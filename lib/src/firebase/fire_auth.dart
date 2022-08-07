@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_login/src/firebase/auth_service.dart';
-import 'package:flutter_login/src/firebase/fire_page.dart';
+import 'package:flutter_login/src/firebase/main_fire_page.dart';
 import 'package:flutter_login/src/firebase/login_page.dart';
 import 'package:provider/provider.dart';
 

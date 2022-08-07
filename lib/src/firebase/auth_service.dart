@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthException implements Exception{
   String message;
@@ -16,6 +17,7 @@ class AuthService extends ChangeNotifier{
     }
 
     _authCheck(){
+      debugPrint("AuthCheck");
       _auth.authStateChanges().listen((User? user) {
         usuarioLogado = (user == null) ? null : user;
         isLoading = false;
@@ -41,6 +43,23 @@ class AuthService extends ChangeNotifier{
       notifyListeners();
     }
 
+    Future<UserCredential> loginGoogle() async {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    //usuarioLogado = googleAuth.accessToken;
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    }
+
     login(String email, String senha) async{
       //setLoading();
       try {
@@ -61,7 +80,7 @@ class AuthService extends ChangeNotifier{
     }
 
     _getUser(){
-      usuarioLogado= _auth.currentUser;
+      usuarioLogado = _auth.currentUser;
       notifyListeners();
     }
 }
