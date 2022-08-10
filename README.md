@@ -42,9 +42,18 @@ firebase login
 flutterfire configure
 Caso não dê certo, dar um firebase logout
 
-Instalar as dependências do firebase: firebase_core é obrigatória
+Instalar as dependências do firebase: firebase_core é obrigatória. firebase_database para realtime database e firebase_auth para a autenticação e firebase_messaging para o FCM
 
 # Keystore certificado
 
 Usar o comando abaixo para ver o fingerprint e add no 
 keytool -list -v -keystore C:\Users\USER\.android\debug.keystore -alias androiddebugkey
+
+No ícone da engrenagem ao lado de Visão Gerao do projeto, verificar onde tem a config do aplicativo para cada um dos ambientes(android, ios e web) e adicionar o SHA correspondente
+
+# Autenticação
+
+Para habilitar a autenticação, lembrar de ir em Authentication e habilitar os sign-in method desejados
+
+# Firebase Cloud Messaging
+

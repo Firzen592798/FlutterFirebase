@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login/src/firebase/auth_service.dart';
+import 'package:flutter_login/src/firebase/firebase_messaging_service.dart';
 import 'package:flutter_login/src/firebase/main_fire_page.dart';
 import 'package:flutter_login/src/firebase/login_page.dart';
 import 'package:provider/provider.dart';
+
+import 'notification_service.dart';
 
 class FireAuth extends StatefulWidget {
   const FireAuth({super.key});
@@ -16,6 +19,16 @@ class _FireAuthState extends State<FireAuth> {
   @override
   void initState() {
     super.initState();
+    initializeFirebaseMessaging();
+    checkNotifications();
+  }
+
+  checkNotifications() async {
+    await Provider.of<NotificationService>(context, listen: false).checkForNotifications();
+  }
+
+  initializeFirebaseMessaging() async{
+    await Provider.of<FirebaseMessagingService>(context, listen: false).initialize();
   }
 
   @override

@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/firebase_options.dart';
 import 'package:flutter_login/src/firebase/auth_service.dart';
+import 'package:flutter_login/src/firebase/firebase_messaging_service.dart';
+import 'package:flutter_login/src/firebase/notification_service.dart';
 import 'package:provider/provider.dart';
 
 import 'src/app.dart';
@@ -32,8 +34,9 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => AuthService())
-        
+        ChangeNotifierProvider(create: (context) => AuthService()),
+        Provider<NotificationService>(create: (context) => NotificationService()),
+        Provider<FirebaseMessagingService>(create: (context) => FirebaseMessagingService(context.read<NotificationService>()),)
       ],
       child: MyApp(settingsController: settingsController),
     ),
